@@ -10,6 +10,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import ch.mabaka.visitorregistrator.persistence.event.Event;
+import ch.mabaka.visitorregistrator.persistence.event.EventRepository;
 import ch.mabaka.visitorregistrator.service.event.EventService;
 
 @Path("/event")
@@ -18,18 +19,21 @@ public class EventRest {
 	@Inject
 	EventService eventService;
 	
+	@Inject
+	EventRepository eventRepository;
+	
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllJournals() {
-        return Response.ok(eventService.readAllEvents()).build();
+        return Response.ok(eventRepository.findAll()).build();
     }
     
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     public Response addEvent(Event newEvent) {
     	try {
-    		eventService.addEvent(newEvent);
+    		eventRepository.save(newEvent);
     		return Response.ok().build();	
     	} catch (Exception e) {
     		return Response.serverError().build();

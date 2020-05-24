@@ -1,5 +1,7 @@
 package ch.mabaka.visitorregistrator.persistence.event;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 
@@ -9,7 +11,12 @@ import ch.mabaka.visitorregistrator.persistence.AbstractEntity;
 public class Event extends AbstractEntity {
 	
 	@NotNull
-	String name;
+	private String name;
+	
+	@NotNull
+	private Date startDateTime;
+	
+	private int numberOfSeats;
 
 	public String getName() {
 		return name;
@@ -17,5 +24,21 @@ public class Event extends AbstractEntity {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Date getStartDateTime() {
+		return startDateTime;
+	}
+
+	public void setStartDateTime(Date startDateTime) {
+		this.startDateTime = startDateTime;
+	}
+
+	public int getNumberOfSeats() {
+		return numberOfSeats;
+	}
+
+	public void setNumberOfSeats(int numberOfSeats) {
+		this.numberOfSeats = numberOfSeats;
 	}
 }

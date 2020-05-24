@@ -13,7 +13,7 @@ import ch.mabaka.visitorregistrator.persistence.event.Event;
 import ch.mabaka.visitorregistrator.persistence.event.EventRepository;
 import ch.mabaka.visitorregistrator.service.event.EventService;
 
-@Path("/event")
+@Path("/api/v1/event")
 public class EventRest {
 	
 	@Inject

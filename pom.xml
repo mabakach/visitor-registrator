@@ -153,6 +153,18 @@
 				</executions>
 			</plugin>
 			<plugin>
+				<artifactId>maven-clean-plugin</artifactId>
+				<version>2.4.1</version>
+				<configuration>
+					<filesets>
+						<fileset>
+							<directory>src/main/generated/META-INF/resources/</directory>
+							<followSymlinks>false</followSymlinks>
+						</fileset>
+					</filesets>
+				</configuration>
+			</plugin>
+			<plugin>
 				<groupId>io.quarkus</groupId>
 				<artifactId>quarkus-maven-plugin</artifactId>
 				<version>${quarkus-plugin.version}</version>

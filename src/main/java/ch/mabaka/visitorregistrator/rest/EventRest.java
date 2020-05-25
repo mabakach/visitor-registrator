@@ -2,7 +2,9 @@ package ch.mabaka.visitorregistrator.rest;
 
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -39,6 +41,28 @@ public class EventRest {
     		return Response.serverError().build();
     	}
     	
+    }
+    
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response updateEvent(Event changedEvent) {
+    	try {
+    		eventRepository.save(changedEvent);
+    		return Response.ok().build();	
+    	} catch (Exception e) {
+    		return Response.serverError().build();
+    	}
+    }
+    
+    @DELETE
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response removeEvent(Event eventToRemove) {
+    	try {
+    		eventRepository.delete(eventToRemove);
+    		return Response.ok().build();	
+    	} catch (Exception e) {
+    		return Response.serverError().build();
+    	}
     }
 
 }

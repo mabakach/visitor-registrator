@@ -21,18 +21,18 @@ class Events extends Component {
 	}
 	
 	render() {
-		let content = null;
+		let table = null;
 		if (this.state.events == null) {
-			content =  (<p>Loading data...</p>);
+			table =  (<p>Loading data...</p>);
 		} else if (this.state.events.length == 0) {
-			content =  (<p>No data found.</p>);
+			table =  (<p>No data found.</p>);
 		} else {
-			content =  (<Table data={this.state.events}/>);
+			table =  (<Table data={this.state.events}/>);
 		}
 		return (
 	            <div>
 					<h1>Events</h1>
-					{content} 
+					{table} 
 				    <button variant="primary" onClick={this.addEvent}>
 				      Add Event
 				    </button>

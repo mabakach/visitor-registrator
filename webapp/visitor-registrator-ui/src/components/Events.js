@@ -1,7 +1,5 @@
-import React, { Component } from 'react';
+import React, { Component, Button } from 'react';
 import Table from './Table.js';
-
-
 
 class Events extends Component {
 
@@ -18,32 +16,28 @@ class Events extends Component {
 	    .catch(console.log)
 	  }
 
+	addEvent() {
+		
+	}
 	
 	render() {
+		let content = null;
 		if (this.state.events == null) {
-			return (
+			content =  (<p>Loading data...</p>);
+		} else if (this.state.events.length == 0) {
+			content =  (<p>No data found.</p>);
+		} else {
+			content =  (<Table data={this.state.events}/>);
+		}
+		return (
 	            <div>
 					<h1>Events</h1>
-					 <p>Loading data</p>
-		            
+					{content} 
+				    <button variant="primary" onClick={this.addEvent}>
+				      Add Event
+				    </button>
 	            </div>
 			);
-		} else if (this.state.events.length == 0) {
-			return (
-		            <div>
-						<h1>Events</h1>
-			            <p>No data found.</p>
-		            </div>
-				);
-		} else {
-			return (
-				<div>
-		            <h1>Events</h1>
-		            <Table data={this.state.events}/>
-	            </div>
-			);
-		}
-	    
 	}
 	
 }

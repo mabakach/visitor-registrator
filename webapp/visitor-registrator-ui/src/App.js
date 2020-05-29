@@ -13,17 +13,19 @@ import './App.css';
 class App extends Component {
   render() {
     return (      
-       <BrowserRouter>
-        <div>
-          <NavigationBar />
-            <Switch>
-             <Route path="/" component={Home} exact/>
-             <Route path="/events" component={Events}/>
-             <Route path="/about" component={About}/>
-            <Route component={Error}/>
-           </Switch>
-        </div> 
-      </BrowserRouter>
+	   <BrowserRouter>
+	    <div>
+	      <NavigationBar />
+	      	<div class="m-3">
+		      	<Switch>
+			        <Route path="/" component={Home} exact/>
+					<Route path="/events" component={Events}/>
+					<Route path="/about" component={About}/>
+					<Route component={Error}/>
+				</Switch>
+			</div>
+	    </div> 
+	  </BrowserRouter>
     );
   }
 }

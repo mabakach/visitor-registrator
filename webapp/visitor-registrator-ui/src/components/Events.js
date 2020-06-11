@@ -1,12 +1,44 @@
 import React, { Component } from 'react';
-import Table from './Table.js';
+import DataTable from 'react-data-table-component';
+ 
+const columns2 = [
+	  {
+	    name: 'ID',
+	    selector: 'sysid',
+	    sortable: true,
+	    compact: true,
+	  },
+	  {
+	    name: 'Insert timestamp',
+	    selector: 'sysinsertts',
+	    sortable: true,
+	    compact: true,
+	  },
+	  {
+	    name: 'Event name',
+	    selector: 'name',
+	    sortable: true,
+	  },
+	  {
+	    name: 'Number of seats',
+	    selector: 'numberOfSeats',
+	    sortable: true,
+	    right: true,
+	  },
+	  {
+	    name: 'Start time',
+	    selector: 'startDateTime',
+	    sortable: true,
+	    compact: true,
+	  },
+	  
+	];
 
 class Events extends Component {
-
 	state = {
-		events: null,
-	}
-	
+			events: [],
+		}
+		
 	componentDidMount() {
 	    fetch('/api/v1/event')
 	    .then(res => res.json())
@@ -20,26 +52,15 @@ class Events extends Component {
 		
 	}
 	
-	render() {
-		let table = null;
-		if (this.state.events == null) {
-			table =  (<p>Loading data...</p>);
-		} else if (this.state.events.length == 0) {
-			table =  (<p>No data found.</p>);
-		} else {
-			table =  (<Table data={this.state.events}/>);
-		}
-		return (
-	            <div>
-					<h1>Events</h1>
-					{table} 
-				    <button variant="primary" onClick={this.addEvent}>
-				      Add Event
-				    </button>
-	            </div>
-			);
-	}
-	
-}
+	  render() {
+	    return (
+	      <DataTable
+	        title="Events"
+	        columns={columns2}
+	        data={this.state.events}
+	      />
+	    )
+	  }
+};
 
 export default Events;

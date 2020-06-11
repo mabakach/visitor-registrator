@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Nav, Navbar, NavDropdown, Form, FormControl, Button } from 'react-bootstrap';
+import { Nav, Navbar } from 'react-bootstrap';
 
 class NavigationBar extends Component {
 	render() {
@@ -11,7 +11,6 @@ class NavigationBar extends Component {
 				    <Nav className="mr-auto">
 				      <Nav.Link href="/">Home</Nav.Link>
 				      <Nav.Link href="/events">Events</Nav.Link>
-				      <Nav.Link href="/events2">Events2</Nav.Link>
 				      <Nav.Link href="/about">About</Nav.Link>
 				    </Nav>
 				  </Navbar.Collapse>

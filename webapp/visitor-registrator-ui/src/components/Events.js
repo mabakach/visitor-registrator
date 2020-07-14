@@ -1,39 +1,6 @@
 import React, { Component } from 'react';
-import DataTable from 'react-data-table-component';
-import { Button } from 'react-bootstrap';
- 
-const columns2 = [
-	{
-	name: 'ID',
-	selector: 'sysid',
-	sortable: true,
-	compact: true,
-	},
-	{
-	name: 'Insert timestamp',
-	selector: 'sysinsertts',
-	sortable: true,
-	compact: true,
-	},
-	{
-	name: 'Event name',
-	selector: 'name',
-	sortable: true,
-	},
-	{
-	name: 'Number of seats',
-	selector: 'numberOfSeats',
-	sortable: true,
-	right: true,
-	},
-	{
-	name: 'Start time',
-	selector: 'startDateTime',
-	sortable: true,
-	compact: true,
-	},
-	
-	];
+import {DataTable} from 'primereact/datatable';
+import {Column} from 'primereact/column';
 
 class Events extends Component {
 	state = {
@@ -41,12 +8,12 @@ class Events extends Component {
 		}
 		
 	componentDidMount() {
-	fetch('/api/v1/event')
-	.then(res => res.json())
-	.then((data) => {
-	this.setState({ events: data })
-	})
-	.catch(console.log)
+		fetch('/api/v1/event')
+		.then(res => res.json())
+		.then((data) => {
+		this.setState({ events: data })
+		})
+		.catch(console.log)
 	}
 
 	addEvent() {
@@ -54,17 +21,21 @@ class Events extends Component {
 	}
 	
 	render() {
-		const tableActions = <Button>New Event</Button>;
+		let cols = [
+            {field: 'sysid', header: 'ID'},
+            {field: 'sysinsertts', header: 'Insert timestamp'},
+            {field: 'name', header: 'Event name'},
+            {field: 'numberOfSeats', header: 'Number of Seats'},
+			{field: 'startDateTime', header: 'Start time'}
+
+        ];
+		let dynamicColumns = cols.map((col,i) => {
+            return <Column key={col.field} field={col.field} header={col.header} />;
+        });
 		return (
-				<div>
-					
-						<DataTable
-							title="Events"
-							actions={tableActions}
-							columns={columns2}
-							data={this.state.events}
-						/>
-				</div>
+				<DataTable value={this.state.events}>
+					{dynamicColumns}
+				</DataTable>
 		)
 	}
 };

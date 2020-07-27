@@ -5,6 +5,11 @@ import { InputText } from 'primereact/inputtext';
 
 class Events extends Component {
 	
+	constructor() {
+		super();
+		this.clonedEvents = [];
+	}
+	
 	state = {
 		events: [],
 	}
@@ -45,13 +50,13 @@ class Events extends Component {
 	    return value && value.length > 0;
 	}
 	
-	onRowEditInit(editEvent) {
+	onRowEditInit = (editEvent) => {
 	    this.clonedEvents[editEvent.data.sysid] = {...editEvent.data};
 	}
 
-	onRowEditSave(event) {
+	onRowEditSave = (event) => {
 	    if (this.onRowEditorValidator(event.data)) {
-	        delete this.clonedCars[event.data.sysid];
+	        delete this.clonedEvents[event.data.sysid];
 	        // Success message
 	    }
 	    else {
@@ -59,7 +64,7 @@ class Events extends Component {
 	    }
 	}
 	
-	onRowEditCancel(editEvent) {
+	onRowEditCancel = (editEvent) => {
 	    let events = [...this.state.events];
 	    events[editEvent.index] = this.clonedEvents[editEvent.data.sysid];
 	    delete this.clonedEvents[editEvent.data.sysid];
@@ -68,11 +73,15 @@ class Events extends Component {
 	    })
 	}
 	
+	onRowEditorValidator = (data) => {
+		return true;
+	}
+	
 	render() {
 		return (
 				<div>
 					<h1>Event Overview</h1>
-					<DataTable value={this.state.events} emptyMessage="No data found" editMode="row">
+					<DataTable value={this.state.events} emptyMessage="No data found" editMode="row" onRowEditInit={this.onRowEditInit} onRowEditSave={this.onRowEditSave} onRowEditCancel={this.onRowEditCancel}>
 						    <Column field="sysid" header="ID" sortable="true"/>
 						    <Column field="sysinsertts" header="Insert timestamp" sortable="true" />
 						    <Column field="name" header="Event name" sortable="true" editor={this.nameEditor} editorValidator={this.requiredValidator}/>

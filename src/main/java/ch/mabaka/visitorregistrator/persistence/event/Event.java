@@ -2,6 +2,7 @@ package ch.mabaka.visitorregistrator.persistence.event;
 
 import java.util.Date;
 
+import javax.json.bind.annotation.JsonbDateFormat;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 
@@ -14,6 +15,7 @@ public class Event extends AbstractEntity {
 	private String name;
 	
 	@NotNull
+	@JsonbDateFormat(value = ISO_INSTANT)
 	private Date startDateTime;
 	
 	private int numberOfSeats;
